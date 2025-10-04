@@ -1,0 +1,98 @@
+/* ...existing code... */
+
+/* container */
+.pageleft-container {
+  position: absolute;  /* starts as absolute */
+  left: 8px;
+  top: 600px;       /* start position when page loads */
+  z-index: 1000;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 160px;     
+  max-width: 160px;
+  box-sizing: border-box;
+  padding: 6px;     
+  pointer-events: auto;
+  transition: all 0.2s ease;  /* smooth transition when position changes */
+}
+
+/* panel */
+.pageleft-panel {
+  background: rgba(255, 255, 255, 0.96);
+  color: #111;
+  border-radius: 8px;
+  padding: 8px;     
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  min-width: 0;
+  width: 100%;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-align: left;  /* ensure text is left-aligned */
+}
+
+/* headings and groups */
+.pageleft-group {
+  margin-top: 12px;  /* increased spacing for new line effect */
+}
+
+.pageleft-heading {
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;  /* more space after heading */
+  font-size: 14px;  
+}
+
+/* links */
+.pageleft-link {
+  display: block;
+  color: #0b74de;
+  text-decoration: none;
+  padding: 6px 0;
+  font-size: 14px;
+  cursor: pointer;  /* ensure clickable cursor */
+}
+
+.pageleft-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.pageleft-sublink {
+  display: block;
+  color: #0b74de;
+  text-decoration: none;
+  padding: 4px 0;
+  padding-left: 12px;
+  font-size: 13px;
+  cursor: pointer;  /* ensure clickable cursor */
+}
+
+.pageleft-sublink:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* small top gap helper */
+.pageleft-top-gap {
+  margin-top: 12px;  /* increased for new line effect */
+}
+
+/* when user scrolls past 600px, change to fixed and move to top */
+.pageleft-container.scrolled {
+  position: fixed;  /* changes to fixed when scrolled */
+  top: 20px;        /* moves to top of viewport */
+}
+
+/* ensure it doesn't push main layout when any JS class toggles */
+.App.pageleft-active {
+  padding-left: 0;
+}
+
+/* responsive: hide on very small screens */
+@media (max-width: 520px) {
+  .pageleft-container { display: none; }
+}
+
+/* ...existing code... */

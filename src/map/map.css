@@ -1,0 +1,412 @@
+.map-wrapper {
+  max-width: 900px;
+  margin: 20px auto;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), rgba(2, 6, 23, 0.01));
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #e6f0f5;
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.35);
+}
+
+.map-error {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 16px;
+  background: rgba(255, 235, 235, 0.04);
+  border-radius: 8px;
+  color: #7f1d1d;
+}
+
+.geojson-pre {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 12px;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 360px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 8px;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.07);
+}
+
+.map-section.container {
+  display: block;
+  /* ensure the section stacks vertically (overrides any .container flex) */
+  padding-top: 12px;
+}
+
+.map-section.container>h3 {
+  margin: 0 0 12px 0;
+  display: block;
+}
+
+.map-section .map-wrapper {
+  margin-top: 12px;
+  width: 100%;
+}
+.map-wrapper svg {
+  background-color: transparent;
+  display: block;
+}
+.map-section .map-wrapper svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-with-slider .map-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map-with-slider .map-and-chart {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* map svg grows to fill available space */
+.map-with-slider .map-svg {
+  flex: 1 1 auto;
+  max-width: 100%;
+  border-radius: 8px;
+  background: #f8fafb;
+}
+
+/* chart box on the right */
+.chart-box {
+  width: 320px;
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.chart-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.chart-legend {
+  margin-top: 8px;
+  color: #374151;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* slider row */
+.slider-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.date-label {
+  min-width: 120px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.date-slider {
+  flex: 1;
+}
+
+/* markers */
+.map-marker text {
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .map-with-slider .map-and-chart {
+    flex-direction: column;
+  }
+
+  .chart-box {
+    width: 100%;
+  }
+}
+
+.chart-svg {
+  background: transparent;
+  display: block;
+  border-radius: 6px;
+}
+
+/* slightly reduce opacity for points/lines when data is sparse */
+.chart-svg circle {
+  transition: opacity .12s ease;
+}
+
+/* responsive tweak */
+@media (max-width: 900px) {
+  .chart-box {
+    width: 100%;
+  }
+}
+
+.map-svg .map-grid {
+  shape-rendering: crispEdges;
+  stroke: #94a3b8;
+  /* slate color for visibility */
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  opacity: 0.95;
+}
+
+/* chart visuals — stronger grid & border */
+.chart-svg rect {
+  stroke: #94a3b8;
+  stroke-width: 1.2;
+}
+
+.chart-svg line {
+  stroke: #cbd5e1;
+  /* visible but still subtle */
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.chart-tick text {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  fill: #334155;
+  /* darker tick label color */
+  font-size: 10px;
+}
+
+/* ensure markers remain visible above grid */
+.map-svg .map-marker {
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ...existing code... */
+
+/* Capital marker hover / label styles */
+.capital-marker {
+  cursor: pointer;
+  transform-origin: center;
+  transform-box: fill-box;
+  /* ensure transform origin works for SVG */
+  transition: transform 0.18s ease, filter 0.18s ease;
+  /* makes marker render above others when hovered (SVG stacking still depends on DOM order) */
+}
+
+/* scale marker on hover and lift slightly */
+.capital-marker:hover {
+  transform: scale(1.35) translateY(-6px);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+/* label hidden by default; reveal on hover */
+.capital-marker .label {
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  pointer-events: none;
+  dominant-baseline: central;
+}
+
+/* show label when marker hovered */
+.capital-marker:hover .label {
+  opacity: 1;
+  transform: translateY(-6px);
+}
+
+/* arrow-tip (dot at the real coordinate) */
+.capital-marker .arrow-tip {
+  transform-origin: center;
+  transform-box: fill-box;
+  /* allow correct SVG scaling origin */
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+/* on hover, make tip slightly larger and add shadow */
+.capital-marker:hover .arrow-tip {
+  transform: scale(1.45);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  opacity: 1;
+}
+
+/* ensure tail line stays visible and gets a small shadow while hovered */
+.capital-marker .marker-tail {
+  transition: filter 0.15s ease, stroke-width 0.15s ease;
+}
+
+.capital-marker:hover .marker-tail {
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  stroke-width: 1.6;
+}
+
+/* outline always visible above the image */
+.capital-marker .marker-outline {
+  pointer-events: none;
+}
+
+/* ensure the flag/image fits perfectly inside the circle */
+capital-marker image {
+  display: block;
+}
+
+.capital-marker .label {
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  pointer-events: none;
+  dominant-baseline: central;
+}
+
+/* outline (stroke) text sits behind; label-fill is the visible colored text */
+.capital-marker .label-outline {
+  /* stays invisble until hover */
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  paint-order: stroke;
+}
+
+.capital-marker .label-fill {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+/* show label when marker hovered */
+.capital-marker:hover .label,
+.capital-marker:focus .label,
+.capital-marker:active .label {
+  opacity: 1;
+  transform: translateY(-6px);
+}
+
+.capital-marker:hover .label-outline,
+.capital-marker:focus .label-outline,
+.capital-marker:active .label-outline {
+  opacity: 1;
+}
+
+.capital-marker:hover .label-fill,
+.capital-marker:focus .label-fill,
+.capital-marker:active .label-fill {
+  opacity: 1;
+}
+
+/* keep hover effects from previous snippet */
+.capital-marker {
+  cursor: pointer;
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.capital-marker:hover {
+  transform: scale(1.35) translateY(-6px);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+/* arrow-tip hover */
+.capital-marker .arrow-tip {
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.capital-marker:hover .arrow-tip {
+  transform: scale(1.45);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+  opacity: 1;
+}
+
+/* tail shadow on hover */
+.capital-marker .marker-tail {
+  transition: filter 0.15s ease, stroke-width 0.15s ease;
+}
+
+.capital-marker:hover .marker-tail {
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+  stroke-width: 1.6;
+}
+
+/* provinces layer minor style */
+.provinces-layer path {
+  transition: opacity .18s ease, fill .18s ease;
+}
+
+.map-content {
+  transform-origin: 0 0;
+  /* transform coordinates are in SVG user space */
+  transform-box: fill-box;
+  transition: transform 600ms cubic-bezier(.22, .9, .3, 1);
+}
+
+/* ensure capital marker hover still scales nicely when group is transformed */
+.capital-marker {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+/* keep existing hover effects (they'll compound with the group transform) */
+.capital-marker:hover {
+  transform: scale(1.35) translateY(-6px);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+/* ...existing code ... */
+
+/* fade-in + slight upward motion on mount, so label appears smoothly */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selected-country-label {
+  pointer-events: none;
+}
+
+/* apply animation to both outline and fill text */
+.selected-country-label .country-title {
+  animation: fadeInUp 420ms cubic-bezier(.22,.9,.3,1) both;
+  transform-origin: center;
+}
+
+/* give outline a tiny delay so it layers nicely */
+.selected-country-label .country-title-outline {
+  animation-duration: 460ms;
+  animation-delay: 0ms;
+}
+
+/* main fill text slightly faster for crispness */
+.selected-country-label .country-title-fill {
+  animation-duration: 420ms;
+  animation-delay: 30ms;
+}
+
+/* ensure text remains readable on top of map */
+.selected-country-label text {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  paint-order: stroke;
+}
+/* ...existing code ... */
