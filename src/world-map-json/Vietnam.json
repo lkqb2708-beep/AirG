@@ -115005,7 +115005,9 @@
       "properties": {
         "source": "https://simplemaps.com", 
         "id": "VNSG", 
-        "name": "Hồ Chí Minh city"
+        "name": "Hồ Chí Minh city",
+        "label_x": 106.660172,
+  "label_y": 10.762622
       }, 
       "id": 29
     }, 

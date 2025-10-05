@@ -1,0 +1,47 @@
+.pdf-flip-root {
+  width: 100%;
+  max-width: 900px;
+  margin: 8px 0;
+}
+
+.pdf-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.pdf-controls button {
+  padding: 6px 10px;
+  background: #0b6630;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pdf-controls button[disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pdf-page-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.pdf-page-wrap .react-pdf__Page {
+  transition: transform 300ms ease, opacity 300ms ease;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pdf-page-wrap.flipping .react-pdf__Page {
+  transform: rotateY(180deg);
+  opacity: 0.95;
+}

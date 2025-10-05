@@ -409,4 +409,19 @@ capital-marker image {
   -webkit-font-smoothing: antialiased;
   paint-order: stroke;
 }
-/* ...existing code ... */
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* helper class if you want to attach via className */
+.hex-spin {
+  animation: spinSlow 8s linear infinite;
+  transform-box: fill-box; /* ensure rotation uses element bounding box */
+  transform-origin: center;
+}

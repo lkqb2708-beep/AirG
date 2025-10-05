@@ -1,0 +1,242 @@
+.gif-gallery h4 {
+  margin-bottom: 0.5rem;
+}
+
+.gif-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .gif-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .gif-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gif-item {
+  margin: 0;
+  text-align: center;
+}
+
+.gif-item img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.gif-item figcaption {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ...existing code... */
+
+.gif-legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers contents horizontally */
+  justify-content: center; /* centers contents vertically if height exists */
+  text-align: center;
+  margin: 1rem auto;
+  color: #555;
+  font-style: italic;
+  width: 100%;
+  max-width: 900px;
+  gap: 0.5rem;
+}
+
+.gif-legend img {
+  display: block;
+  max-width: 220px;
+  width: 30%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* responsive tweak */
+@media (max-width: 600px) {
+  .gif-legend img {
+    width: 45%;
+    max-width: 160px;
+  }
+}
+
+.disclaimer {
+  font-style: italic;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+/* Emphasize the "NOT" with a red outline + glow (blur) */
+.disclaimer .highlight-not {
+  color: #ff4d4d;
+  font-weight: 700;
+  -webkit-text-stroke: 1px rgba(180,0,0,0.9); /* outline for WebKit */
+  text-shadow:
+    0 0 6px rgba(255,77,77,0.85),
+    0 0 12px rgba(255,77,77,0.5); /* soft blur/glow */
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+.level--very-low {
+  color: #bfa08a;
+  -webkit-text-stroke: 0.6px rgba(110,80,60,0.9);
+  text-shadow: 0 0 6px rgba(191,160,138,0.35);
+}
+
+/* 0.1–0.3: yellowish */
+.level--low {
+  color: #e7d58f;
+  -webkit-text-stroke: 0.6px rgba(140,110,40,0.9);
+  text-shadow: 0 0 6px rgba(231,213,143,0.35);
+}
+
+/* 0.3–0.6: orange */
+.level--moderate {
+  color: #f39c57;
+  -webkit-text-stroke: 0.6px rgba(150,75,20,0.9);
+  text-shadow: 0 0 8px rgba(243,156,87,0.35);
+}
+
+/* 0.6–1.0: orange red */
+.level--high {
+  color: #ff6b4a;
+  -webkit-text-stroke: 0.6px rgba(150,30,10,0.9);
+  text-shadow: 0 0 10px rgba(255,107,74,0.4);
+}
+
+/* >1.0: red */
+.level--extreme {
+  color: #d90000;
+  -webkit-text-stroke: 0.8px rgba(120,0,0,0.95);
+  text-shadow: 0 0 12px rgba(217,0,0,0.55);
+}
+
+/* responsive: stack legend under image on small screens */
+@media (max-width: 700px) {
+  .gif-legend {
+    flex-direction: column;
+    align-items: center;
+  }
+  .legend-explain {
+    text-align: center;
+  }
+}
+/* ...existing code ... */
+
+.legend-content {
+  flex: 1 1 auto;
+  text-align: left;
+  min-width: 260px;
+}
+
+/* vertical list of compact range rows (each row stays on one line) */
+.range-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* single range row: swatch on left, text on right */
+.range-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-style: italic;
+  color: #222;
+  white-space: nowrap; /* keep number and label on one line where possible */
+}
+
+/* swatch block showing approximate color for each AOD level */
+.swatch {
+  width: 44px;
+  height: 12px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  flex: 0 0 44px;
+}
+
+/* swatch color approximations (tweak if you prefer different hues) */
+.range--very-low .swatch { background: #fff7a8; }   /* skin */
+.range--low .swatch { background: #e7d58f; }        /* yellowish */
+.range--moderate .swatch { background: #f39c57; }   /* orange */
+.range--high .swatch { background: #ff6b4a; }       /* orange-red */
+.range--extreme .swatch { background: #d90000; }    /* red */
+
+/* text styling */
+.range-text { font-size: 0.95rem; color: #333; }
+
+/* keep title below or aligned as before */
+.legend-explain .legend-title {
+  margin-top: 8px;
+  font-style: italic;
+  color: #444;
+}
+
+/* responsive: if narrow, allow wrapping but keep swatch + text together */
+@media (max-width: 700px) {
+  .range-item { white-space: normal; }
+  .gif-legend { flex-direction: column; align-items: flex-start; }
+  .gif-legend img { width: 40%; flex: 0 0 auto; margin-bottom: 0.5rem; }
+  .legend-content { width: 100%; }
+}
+
+/* ...existing code... */
+
+.gif-controls {
+  margin: 0.75rem 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.gif-controls label {
+  font-size: 0.95rem;
+  color: #333;
+}
+.gif-controls select {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(2,6,23,0.06);
+  background: white;
+  font-size: 0.95rem;
+}
+
+/* Large viewer for chosen GIF */
+.gif-viewer {
+  margin: 1rem 0;
+  text-align: center;
+}
+.gif-viewer img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.04);
+}
+.gif-viewer figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* ...existing code... */
