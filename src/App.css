@@ -40,46 +40,39 @@
   }
 }
 
-/* Landing hero */
 .hero {
   position: relative;
-  background-color: #0b2b33; /* fallback */
-  background-size: cover;
-  background-position: center;
-  min-height: 420px;
+  min-height: 85vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #fff;
-  margin-bottom: 2rem;
-  text-align: left; /* Overrides any potential centering */
+  overflow: hidden;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(3,37,34,0.55), rgba(3,37,34,0.55));
-  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
 }
 
 .hero-content {
-  position: relative; /* above overlay */
+  position: relative;
   z-index: 2;
-  padding: 3rem 0;
-  text-align: left;
-  max-width: 980px;
+  padding: 2rem 0;
 }
 
 .hero-title {
-  font-size: clamp(28px, 4.5vw, 48px);
-  margin: 0 0 0.6rem;
-  line-height: 1.05;
-  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero-sub {
-  font-size: clamp(14px, 2.2vw, 18px);
-  margin: 0 0 1.2rem;
-  color: rgba(255,255,255,0.92);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* CTA buttons */

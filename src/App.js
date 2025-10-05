@@ -16,15 +16,23 @@ const Hero = () => (
   <main
     className="hero"
     role="banner"
-    style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/hero.jpg)` }}
+    style={{ 
+      backgroundImage: `url(${process.env.PUBLIC_URL}/earth-astronaut.png)`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover'
+    }}
   >
-    <div className="hero-overlay" />
-    <div className="container hero-content">
+    <div className="hero-overlay" style={{ 
+      position: 'absolute', 
+      inset: 0, 
+      background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%)',
+      zIndex: 1 
+    }} />
+    <div className="container hero-content" style={{ position: 'relative', zIndex: 2 }}>
       <div className="hero-text">
         <h1 className="hero-title">Aero‑Cast — See the invisible, understand the Earth, and protect our future.</h1>
         <p className="hero-sub">
          Our atmosphere has a story to tell. Will you listen?
-
         </p>
       </div>
       <div className="hero-ctas">
