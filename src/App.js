@@ -7,7 +7,9 @@ import PageLeft from "./pageleft/PageLeft"; // left TOC tab
 import GifGallery from "./components/GifGallery";
 import AOD from "./AOD_Map/AOD";
 import Predict from "./predict/preditct";
-
+import ScratchGame from "./game/game";
+import ScratchEmbed from "./game/game";
+// ...existing code...
 // --- Child Components for better organization ---
 
 const Hero = () => (
@@ -19,10 +21,10 @@ const Hero = () => (
     <div className="hero-overlay" />
     <div className="container hero-content">
       <div className="hero-text">
-        <h1 className="hero-title">Aero‑Cast — Seeing the invisible air</h1>
+        <h1 className="hero-title">Aero‑Cast — See the invisible, understand the Earth, and protect our future.</h1>
         <p className="hero-sub">
-          Real‑time air quality monitoring and forecasts powered by NASA
-          data and AI.
+         Our atmosphere has a story to tell. Will you listen?
+
         </p>
       </div>
       <div className="hero-ctas">
@@ -95,6 +97,15 @@ const GameSection = () => (
     <p>Each question is designed to help you discover the deep connection between the air we breathe and the global Sustainable Development Goals (SDGs) – from Good Health and Well-being (SDG 3) and Sustainable Cities (SDG 11), to Climate Action (SDG 13).</p>
     <p>Every correct answer doesn't just help you win the game; it also equips you with a powerful real-world tool: knowledge.</p>
     <p>Let's play, learn, and become part of the solution for a cleaner future!</p>
+
+ 
+    <h4 style={{ marginTop: 24 }}>Scratch Project (Embedded)</h4>
+    <ScratchEmbed projectId="1225140410" />
+
+    <h4 style={{ marginTop: 40 }}>Mini Scratch-Off Reveal</h4>
+    <div style={{ marginTop: 12 }}>
+      <ScratchGame width={720} height={360} brush={30} revealThreshold={0.5} />
+    </div>
   </section>
 );
 
